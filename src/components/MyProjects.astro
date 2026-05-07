@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects'))
+  .filter((p) => p.data.featured)
+  .slice(0, 6);
+
+const allProjects = (await getCollection('projects')).slice(0, 6);
+const displayProjects = projects.length > 0 ? projects : allProjects;
+---
+
+<section id="projects" class="mb-20">
+  <h2 class="section-title">Projects</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {displayProjects.map((project) => (
+      <a
+        href={project.data.link || `/projects/${project.slug}`}
+        target={project.data.link ? '_blank' : undefined}
+        rel={project.data.link ? 'noopener noreferrer' : undefined}
+        class="block py-4 px-4 -mx-4 card-hover group"
+      >
+        <div class="flex items-start justify-between gap-2 mb-1.5">
+          <h3 class="text-sm font-medium text-main group-hover:text-main/80 transition-colors">
+            {project.data.title}
+          </h3>
+          {project.data.link && (
+            <svg class="w-3.5 h-3.5 text-muted shrink-0 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          )}
+        </div>
+        <p class="text-xs text-muted leading-relaxed mb-2">
+          {project.data.description}
+        </p>
+        <div class="flex flex-wrap gap-1.5">
+          {project.data.tags.map((tag) => (
+            <span class="text-2xs text-muted bg-subtle px-2 py-0.5 rounded">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </a>
+    ))}
+  </div>
+  {displayProjects.length === 0 && (
+    <p class="text-sm text-muted">暂无项目</p>
+  )}
+</section>

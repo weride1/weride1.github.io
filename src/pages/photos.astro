@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import PhotoWall from '../components/bento/PhotoWall';
+
+const photos = [
+  { id: 1, src: 'https://picsum.photos/seed/p1/600/800', alt: 'Photo 1' },
+  { id: 2, src: 'https://picsum.photos/seed/p2/600/400', alt: 'Photo 2' },
+  { id: 3, src: 'https://picsum.photos/seed/p3/600/750', alt: 'Photo 3' },
+  { id: 4, src: 'https://picsum.photos/seed/p4/600/500', alt: 'Photo 4' },
+  { id: 5, src: 'https://picsum.photos/seed/p5/600/900', alt: 'Photo 5' },
+  { id: 6, src: 'https://picsum.photos/seed/p6/600/600', alt: 'Photo 6' },
+  { id: 7, src: 'https://picsum.photos/seed/p7/600/450', alt: 'Photo 7' },
+  { id: 8, src: 'https://picsum.photos/seed/p8/600/700', alt: 'Photo 8' },
+  { id: 9, src: 'https://picsum.photos/seed/p9/600/550', alt: 'Photo 9' },
+];
+---
+
+<Base title="Photos — weride1">
+  <div class="max-w-4xl mx-auto">
+    <header class="mb-12">
+      <h1 class="text-3xl font-bold text-gray-800 tracking-tight">照片墙</h1>
+      <p class="text-gray-400 text-sm mt-2">用镜头记录生活中的瞬间</p>
+    </header>
+    <PhotoWall photos={photos} client:load />
+  </div>
+</Base>

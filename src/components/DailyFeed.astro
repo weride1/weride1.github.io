@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+
+const feed = (await getCollection('feed'))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 10);
+---
+
+<section class="mb-20">
+  <h2 class="section-title">Daily Feed</h2>
+  <div class="space-y-0">
+    {feed.map((item) => (
+      <div class="flex gap-4 py-4 border-t border-subtle first:border-t-0">
+        <div class="shrink-0 w-16 text-right">
+          <time class="text-2xs text-muted tabular-nums">
+            {item.data.date}
+          </time>
+          {item.data.mood && (
+            <p class="text-2xs text-muted mt-0.5">{item.data.mood}</p>
+          )}
+        </div>
+        <div class="text-sm text-main/90 leading-relaxed min-w-0 [&_p]:mb-2 [&_p:last-child]:mb-0 prose-feed">
+          <Fragment set:html={item.body} />
+        </div>
+      </div>
+    ))}
+  </div>
+  {feed.length === 0 && (
+    <p class="text-sm text-muted">暂无动态</p>
+  )}
+</section>

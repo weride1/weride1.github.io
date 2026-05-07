@@ -14,37 +14,21 @@ const { project } = Astro.props;
 const { Content } = await project.render();
 ---
 
-<Base title={`${project.data.title} - 个人主页`}>
-  <article class="py-16">
-    <div class="max-w-3xl mx-auto px-6">
-      <a href="/#projects" class="text-primary hover:underline text-sm mb-8 inline-block">
-        &larr; 返回项目列表
-      </a>
-      <h1 class="text-3xl font-bold mb-4">{project.data.title}</h1>
-      <div class="flex flex-wrap gap-2 mb-6">
-        {project.data.tags.map((tag: string) => (
-          <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm">
-            {tag}
-          </span>
+<Base title={`${project.data.title} — weride1`}>
+  <article class="max-w-3xl mx-auto pt-16 pb-20">
+    <header class="mb-12">
+      <h1 class="text-2xl font-semibold text-gray-800 tracking-tight mb-3">
+        {project.data.title}
+      </h1>
+      <p class="text-sm text-gray-500 leading-relaxed mb-4">{project.data.description}</p>
+      <div class="flex flex-wrap gap-2">
+        {project.data.tags.map((tag) => (
+          <span class="morandi-tag bg-morandi-sage/20 text-morandi-sage">{tag}</span>
         ))}
       </div>
-      <p class="text-gray-500 text-sm mb-8">
-        {project.data.date.toLocaleDateString('zh-CN')}
-      </p>
-      <div class="prose prose-blue max-w-none">
-        <Content />
-      </div>
-      {project.data.link && (
-        <div class="mt-8">
-          <a
-            href={project.data.link}
-            target="_blank"
-            class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition-colors"
-          >
-            访问项目 &rarr;
-          </a>
-        </div>
-      )}
+    </header>
+    <div class="glass-container p-8 text-sm text-gray-700 leading-[1.9] [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-gray-800 [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:pl-5 [&_ul]:list-disc [&_code]:text-xs [&_code]:bg-white/40 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_pre]:bg-white/40 [&_pre]:backdrop-blur-sm [&_pre]:p-4 [&_pre]:rounded-2xl [&_pre]:overflow-x-auto [&_pre]:text-xs">
+      <Content />
     </div>
   </article>
 </Base>

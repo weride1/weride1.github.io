@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ReadingProgress from '../../components/article/ReadingProgress';
+import Toc from '../../components/article/Toc';
+import { estimateReadingMinutes, extractToc } from '../../lib/reading';
+import { Clock } from 'lucide-react';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+
+const readingMinutes = estimateReadingMinutes(article.body || '');
+const toc = extractToc(article.body || '');
+const tags = article.data.tags ?? [];
+---
+
+<Base title={`${article.data.title} — weride1`} description={article.data.summary}>
+  <ReadingProgress client:load />
+
+  <div class="lg:flex lg:items-start lg:justify-center">
+    <article class="max-w-3xl w-full mx-auto pt-4 pb-20">
+      <header class="mb-12">
+        <div class="flex items-center gap-3 text-xs text-gray-400 mb-3">
+          <time class="tabular-nums">{article.data.date}</time>
+          <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+          <span class="inline-flex items-center gap-1">
+            <Clock size={12} />
+            {readingMinutes} 分钟阅读
+          </span>
+        </div>
+        <h1 class="text-2xl font-semibold text-gray-800 tracking-tight mb-4">
+          {article.data.title}
+        </h1>
+        {article.data.summary && (
+          <p class="text-sm text-gray-500 leading-relaxed mb-4">{article.data.summary}</p>
+        )}
+        {tags.length > 0 && (
+          <div class="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <a
+                href={`/blog?tag=${encodeURIComponent(tag)}`}
+                class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition-colors"
+              >
+                #{tag}
+              </a>
+            ))}
+          </div>
+        )}
+      </header>
+      <div class="glass-container p-8 text-sm text-gray-700 leading-[1.9] [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-gray-800 [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:scroll-mt-28 [&_h3]:text-base [&_h3]:font-medium [&_h3]:text-gray-800 [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:scroll-mt-28 [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:pl-5 [&_ul]:list-disc [&_ol]:mb-4 [&_ol]:pl-5 [&_ol]:list-decimal [&_li]:mb-1 [&_code]:text-xs [&_code]:bg-white/40 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_pre]:bg-white/40 [&_pre]:backdrop-blur-sm [&_pre]:p-4 [&_pre]:rounded-2xl [&_pre]:overflow-x-auto [&_pre]:text-xs [&_blockquote]:border-l-2 [&_blockquote]:border-morandi-sage/30 [&_blockquote]:pl-4 [&_blockquote]:text-gray-500 [&_a]:underline [&_a]:underline-offset-4 [&_a]:decoration-gray-300 [&_a:hover]:decoration-gray-600 [&_img]:rounded-bento [&_hr]:border-white/30 [&_hr]:my-8">
+        <Content />
+      </div>
+    </article>
+
+    <Toc items={toc} client:load />
+  </div>
+</Base>

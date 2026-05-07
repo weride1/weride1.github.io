@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articles'))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 5);
+---
+
+<section id="writing" class="mb-20">
+  <h2 class="section-title">Writing</h2>
+  <div class="space-y-1">
+    {articles.map((article) => (
+      <a
+        href={`/articles/${article.slug}`}
+        class="flex items-baseline justify-between py-3 card-hover px-3 -mx-3 group"
+      >
+        <span class="text-sm text-main group-hover:text-main/80 transition-colors">
+          {article.data.title}
+        </span>
+        <span class="text-2xs text-muted tabular-nums ml-4 shrink-0">
+          {article.data.date}
+        </span>
+      </a>
+    ))}
+  </div>
+  {articles.length === 0 && (
+    <p class="text-sm text-muted">暂无文章</p>
+  )}
+</section>

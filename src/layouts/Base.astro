@@ -1,10 +1,21 @@
 ---
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import Nav from '../components/Nav';
+
 interface Props {
   title: string;
   description?: string;
+  hideNav?: boolean;
+  wide?: boolean;
 }
 
-const { title, description = '个人主页 - 资深内部审计师 & 全栈开发者' } = Astro.props;
+const {
+  title,
+  description = 'weride1 — 个人门户',
+  hideNav = false,
+  wide = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -15,28 +26,19 @@ const { title, description = '个人主页 - 资深内部审计师 & 全栈开�
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <ClientRouter />
   </head>
-  <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-      <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="/" class="text-xl font-bold text-primary">个人主页</a>
-        <div class="flex gap-6">
-          <a href="/#about" class="hover:text-primary transition-colors">关于我</a>
-          <a href="/#skills" class="hover:text-primary transition-colors">技能</a>
-          <a href="/#projects" class="hover:text-primary transition-colors">项目</a>
-          <a href="/#contact" class="hover:text-primary transition-colors">联系</a>
-        </div>
-      </div>
-    </nav>
+  <body class="min-h-screen">
+    {!hideNav && <Nav client:load transition:persist />}
 
-    <main class="flex-1">
+    <main
+      class:list={[
+        'pb-20 px-4 sm:px-6 lg:px-8 mx-auto',
+        hideNav ? 'pt-8' : 'pt-24',
+        wide ? 'max-w-7xl' : 'max-w-6xl',
+      ]}
+    >
       <slot />
     </main>
-
-    <footer class="bg-white border-t mt-auto">
-      <div class="max-w-5xl mx-auto px-6 py-6 text-center text-gray-500 text-sm">
-        &copy; {new Date().getFullYear()} 个人主页. All rights reserved.
-      </div>
-    </footer>
   </body>
 </html>

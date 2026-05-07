@@ -1,16 +1,90 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Skills from '../components/Skills.astro';
-import Projects from '../components/Projects.astro';
-import Contact from '../components/Contact.astro';
+import NavCard from '../components/bento/NavCard';
+import GreetingCard from '../components/bento/GreetingCard';
+import DigitalClock from '../components/bento/DigitalClock';
+import MiniCalendar from '../components/bento/Calendar';
+import SocialLinks from '../components/bento/SocialLinks';
+import WriteButton from '../components/bento/WriteButton';
+import LatestArticleCard from '../components/bento/LatestArticleCard';
+import RandomProjectCard from '../components/bento/RandomProjectCard';
+import PhotoWall from '../components/bento/PhotoWall';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articles', ({ data }) => !data.draft))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const latestArticle = articles[0]
+  ? {
+      slug: articles[0].slug,
+      title: articles[0].data.title,
+      date: articles[0].data.date,
+      summary: articles[0].data.summary,
+      tags: articles[0].data.tags ?? [],
+      cover: articles[0].data.cover,
+    }
+  : undefined;
+
+const projects = (await getCollection('projects')).map((p) => ({
+  slug: p.slug,
+  title: p.data.title,
+  description: p.data.description,
+  tags: p.data.tags,
+  link: p.data.link,
+}));
+
+const feed = await getCollection('feed');
+const markedDates = feed.map((f) => f.data.date);
+
+const photos = [
+  { id: 1, src: 'https://picsum.photos/seed/bento1/600/600', alt: 'Photo 1' },
+  { id: 2, src: 'https://picsum.photos/seed/bento2/600/600', alt: 'Photo 2' },
+  { id: 3, src: 'https://picsum.photos/seed/bento3/600/600', alt: 'Photo 3' },
+  { id: 4, src: 'https://picsum.photos/seed/bento4/600/600', alt: 'Photo 4' },
+];
 ---
 
-<Base title="个人主页">
-  <Hero />
-  <About />
-  <Skills />
-  <Projects />
-  <Contact />
+<Base title="weride1" hideNav wide>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6 auto-rows-min">
+    {/* Left col: NavCard */}
+    <div class="md:col-span-2 lg:col-span-3">
+      <NavCard client:load />
+    </div>
+
+    {/* Middle col: PhotoWall */}
+    <div class="lg:col-span-4">
+      <PhotoWall photos={photos} client:load />
+    </div>
+
+    {/* Right col group: WriteButton + Clock */}
+    <div class="md:col-span-2 lg:col-span-5 grid grid-cols-2 gap-5 lg:gap-6">
+      <WriteButton client:load />
+      <DigitalClock client:load />
+    </div>
+
+    {/* Greeting */}
+    <div class="md:col-span-2 lg:col-span-4">
+      <GreetingCard client:load />
+    </div>
+
+    {/* Calendar */}
+    <div class="md:col-span-2 lg:col-span-4">
+      <MiniCalendar markedDates={markedDates} client:load />
+    </div>
+
+    {/* Latest Article */}
+    <div class="lg:col-span-4">
+      <LatestArticleCard article={latestArticle} client:load />
+    </div>
+
+    {/* Social Links */}
+    <div class="md:col-span-2 lg:col-span-8">
+      <SocialLinks client:load />
+    </div>
+
+    {/* Random Project (centered, full width) */}
+    <div class="md:col-span-2 lg:col-span-12">
+      <RandomProjectCard projects={projects} client:load />
+    </div>
+  </div>
 </Base>

@@ -1,0 +1,42 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = '个人主页 - 资深内部审计师 & 全栈开发者' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+      <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/" class="text-xl font-bold text-primary">个人主页</a>
+        <div class="flex gap-6">
+          <a href="/#about" class="hover:text-primary transition-colors">关于我</a>
+          <a href="/#skills" class="hover:text-primary transition-colors">技能</a>
+          <a href="/#projects" class="hover:text-primary transition-colors">项目</a>
+          <a href="/#contact" class="hover:text-primary transition-colors">联系</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="bg-white border-t mt-auto">
+      <div class="max-w-5xl mx-auto px-6 py-6 text-center text-gray-500 text-sm">
+        &copy; {new Date().getFullYear()} 个人主页. All rights reserved.
+      </div>
+    </footer>
+  </body>
+</html>

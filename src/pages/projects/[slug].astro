@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<Base title={`${project.data.title} - 个人主页`}>
+  <article class="py-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <a href="/#projects" class="text-primary hover:underline text-sm mb-8 inline-block">
+        &larr; 返回项目列表
+      </a>
+      <h1 class="text-3xl font-bold mb-4">{project.data.title}</h1>
+      <div class="flex flex-wrap gap-2 mb-6">
+        {project.data.tags.map((tag: string) => (
+          <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <p class="text-gray-500 text-sm mb-8">
+        {project.data.date.toLocaleDateString('zh-CN')}
+      </p>
+      <div class="prose prose-blue max-w-none">
+        <Content />
+      </div>
+      {project.data.link && (
+        <div class="mt-8">
+          <a
+            href={project.data.link}
+            target="_blank"
+            class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition-colors"
+          >
+            访问项目 &rarr;
+          </a>
+        </div>
+      )}
+    </div>
+  </article>
+</Base>

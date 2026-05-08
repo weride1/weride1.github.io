@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Home, FileText, FolderCode, Activity, Camera } from 'lucide-react';
+import { Home, FileText, FolderCode, Activity, Camera, Smile } from 'lucide-react';
 
 const navItems = [
   { icon: Home, label: '主页', en: 'Home', href: '/' },
@@ -9,6 +9,7 @@ const navItems = [
   { icon: FolderCode, label: '项目', en: 'Projects', href: '/projects' },
   { icon: Activity, label: '日报', en: 'Daily', href: '/daily' },
   { icon: Camera, label: '照片', en: 'Photos', href: '/photos' },
+  { icon: Smile, label: '梗漫画', en: 'GengComic', href: 'https://gengcomic.weride1.cn', external: true },
 ];
 
 function normalize(pathname: string) {
@@ -67,10 +68,13 @@ export default function NavCard() {
       <ul className="space-y-1 flex-1">
         {navItems.map((item) => {
           const isActive = activePath === item.href;
+          const isExternal = 'external' in item && item.external;
           return (
             <li key={item.href}>
               <motion.a
                 href={item.href}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
                 whileHover={{ x: isActive ? 0 : 2 }}
                 whileTap={{ scale: 0.98 }}
                 className={`relative flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm transition-colors duration-200 ${
@@ -79,7 +83,7 @@ export default function NavCard() {
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
-                {isActive && (
+                {isActive && !isExternal && (
                   <motion.span
                     layoutId="navcard-active"
                     className="absolute inset-0 bg-mint-200/70 rounded-2xl border border-mint-300/50"
@@ -89,8 +93,8 @@ export default function NavCard() {
                 <span className="relative z-10 flex items-center gap-3">
                   <item.icon
                     size={16}
-                    strokeWidth={isActive ? 2.2 : 1.8}
-                    className={isActive ? 'text-mint-600' : 'text-gray-400'}
+                    strokeWidth={isActive && !isExternal ? 2.2 : 1.8}
+                    className={isActive && !isExternal ? 'text-mint-600' : 'text-gray-400'}
                   />
                   <span>{item.label}</span>
                   <span className="ml-auto text-[10px] tracking-wider text-gray-400">

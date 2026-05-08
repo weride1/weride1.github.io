@@ -19,6 +19,9 @@ function isLong(content: string) {
 export default function DailyFeed({ feed }: { feed: FeedItem[] }) {
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
 
+  // 按日期倒序排序
+  const sortedFeed = [...feed].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   const toggleExpand = (slug: string) => {
     setExpandedSlug(expandedSlug === slug ? null : slug);
   };
@@ -44,7 +47,7 @@ export default function DailyFeed({ feed }: { feed: FeedItem[] }) {
           <div className="absolute left-3 top-2 bottom-2 w-px border-l border-dashed border-gray-300" />
 
           <div className="space-y-2">
-            {feed.map((item, i) => {
+            {sortedFeed.map((item, i) => {
               const isExpanded = expandedSlug === item.slug;
               return (
                 <motion.div
@@ -96,7 +99,7 @@ export default function DailyFeed({ feed }: { feed: FeedItem[] }) {
             })}
           </div>
         </div>
-        {feed.length === 0 && (
+        {sortedFeed.length === 0 && (
           <p className="text-sm text-gray-400 text-center py-8">暂无动态</p>
         )}
       </div>

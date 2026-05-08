@@ -34,7 +34,7 @@ const projects = (await getCollection('projects')).map((p) => ({
   link: p.data.link,
 }));
 
-const feed = await getCollection('feed');
+const feed = (await getCollection('feed')).sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 const markedDates = feed.map((f) => f.data.date);
 
 const photos = [

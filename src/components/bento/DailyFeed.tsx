@@ -28,7 +28,7 @@ export default function DailyFeed({ feed }: { feed: FeedItem[] }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.4 }}
-      className="glass-container p-3 max-h-[240px] overflow-y-auto"
+      className="glass-container p-3 flex-1 overflow-y-auto"
     >
       <div className="flex items-center gap-2 mb-3">
         <Activity size={14} className="text-emerald-500" />

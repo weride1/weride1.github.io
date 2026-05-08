@@ -9,7 +9,7 @@ const navItems = [
   { icon: FolderCode, label: '项目', en: 'Projects', href: '/projects' },
   { icon: Activity, label: '日报', en: 'Daily', href: '/daily' },
   { icon: Camera, label: '照片', en: 'Photos', href: '/photos' },
-  { icon: Smile, label: '梗漫画', en: 'GengComic', href: 'https://gengcomic.weride1.cn', external: true },
+  { icon: Smile, label: '梗漫画', en: 'GengComic', href: 'https://genggraph.weride1.cn', external: true },
 ];
 
 function normalize(pathname: string) {

@@ -62,9 +62,7 @@ const photos = [
         <WriteButton client:load />
         <DigitalClock client:load />
       </div>
-      <div class="flex-1">
-        <DailyFeed feed={feed.map((f) => ({ slug: f.slug, date: f.data.date, mood: f.data.mood, content: f.body ?? '' }))} client:load />
-      </div>
+      <DailyFeed feed={feed.map((f) => ({ slug: f.slug, date: f.data.date, mood: f.data.mood, content: f.body ?? '' }))} client:load />
     </div>
 
     {/* Greeting + Social Links - 向上移动与照片墙底部间隔50px */}

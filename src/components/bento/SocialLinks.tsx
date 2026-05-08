@@ -13,19 +13,19 @@ const links = [
   {
     icon: Tv,
     label: 'Bilibili',
-    href: '#',
+    href: 'https://b23.tv/3sUhpRi',
     color: 'hover:bg-pink-400 hover:text-white hover:border-pink-400',
   },
   {
     icon: BookOpen,
     label: '小红书',
-    href: '#',
+    href: 'https://xhslink.com/m/81HeFX7lR6n',
     color: 'hover:bg-red-400 hover:text-white hover:border-red-400',
   },
   {
     icon: Mail,
     label: 'Email',
-    href: 'mailto:hi@example.com',
+    href: 'mailto:1947999194@qq.com',
     color: 'hover:bg-mint-500 hover:text-white hover:border-mint-500',
   },
 ];

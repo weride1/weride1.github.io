@@ -55,9 +55,6 @@ export default function NavCard() {
             <h2 className="text-base font-semibold text-gray-800 tracking-tight truncate">
               weride1
             </h2>
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-gray-200/70 text-gray-500 shrink-0">
-              开发中
-            </span>
           </div>
           <p className="text-xs text-gray-500 mt-0.5 truncate">个人门户 · 治愈系</p>
         </div>

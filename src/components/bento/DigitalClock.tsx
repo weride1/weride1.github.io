@@ -26,7 +26,7 @@ export default function DigitalClock() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.1 }}
-      className="glass-card p-5 flex flex-col justify-between overflow-hidden"
+      className="glass-card px-5 py-1.5 flex flex-col items-center overflow-hidden h-full"
     >
       <div className="flex items-center justify-between text-[10px] tracking-[0.2em] text-gray-500/80 uppercase mb-2">
         <span>Local Time</span>
@@ -46,7 +46,7 @@ export default function DigitalClock() {
           {minutes}
         </motion.span>
       </div>
-      <div className="text-xs text-gray-500 mt-2 font-medium">{dateLabel}</div>
+      <div className="text-xs text-gray-500 mt-1 font-medium">{dateLabel}</div>
     </motion.div>
   );
 }

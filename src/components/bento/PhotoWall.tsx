@@ -21,7 +21,7 @@ export default function PhotoWall({ photos }: { photos: Photo[] }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="glass-container p-8"
+        className="glass-container p-8 h-full"
       >
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
@@ -34,7 +34,7 @@ export default function PhotoWall({ photos }: { photos: Photo[] }) {
         </div>
 
         {/* Polaroid stack effect */}
-        <div className="relative h-48 mx-4">
+        <div className="relative h-64 mx-2">
           {displayPhotos.map((photo, i) => (
             <motion.div
               key={photo.id}
@@ -43,8 +43,8 @@ export default function PhotoWall({ photos }: { photos: Photo[] }) {
                 opacity: 1,
                 scale: 1,
                 rotate: polaroidRotations[i % polaroidRotations.length],
-                x: i * 20 - 30,
-                y: i * 15,
+                x: i * 45 - 140,
+                y: i * 28,
               }}
               whileHover={{
                 scale: 1.1,

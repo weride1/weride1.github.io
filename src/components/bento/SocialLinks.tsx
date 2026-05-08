@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Tv, BookOpen, Mail } from 'lucide-react';
+import { Code, Tv, BookOpen } from 'lucide-react';
 
 const links = [
   {
@@ -21,12 +21,6 @@ const links = [
     label: '小红书',
     href: 'https://xhslink.com/m/81HeFX7lR6n',
     color: 'hover:bg-red-400 hover:text-white hover:border-red-400',
-  },
-  {
-    icon: Mail,
-    label: 'Email',
-    href: 'mailto:1947999194@qq.com',
-    color: 'hover:bg-mint-500 hover:text-white hover:border-mint-500',
   },
 ];
 

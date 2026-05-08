@@ -9,6 +9,7 @@ import WriteButton from '../components/bento/WriteButton';
 import LatestArticleCard from '../components/bento/LatestArticleCard';
 import RandomProjectCard from '../components/bento/RandomProjectCard';
 import PhotoWall from '../components/bento/PhotoWall';
+import DailyFeed from '../components/bento/DailyFeed';
 import { getCollection } from 'astro:content';
 
 const articles = (await getCollection('articles', ({ data }) => !data.draft))
@@ -45,45 +46,41 @@ const photos = [
 ---
 
 <Base title="weride1" hideNav wide>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6 auto-rows-min">
-    {/* Left col: NavCard */}
-    <div class="md:col-span-2 lg:col-span-3">
-      <NavCard client:load />
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6 auto-rows-min items-start">
+    {/* Top area: left( Nav + PhotoWall ) + right( Write/Clock + LatestArticle ) */}
+    <div class="md:col-span-2 lg:col-span-7 flex flex-row gap-5 lg:gap-6 items-stretch">
+      <div class="lg:w-[43%]">
+        <NavCard client:load />
+      </div>
+      <div class="lg:w-[57%]">
+        <PhotoWall photos={photos} client:load />
+      </div>
     </div>
 
-    {/* Middle col: PhotoWall */}
-    <div class="lg:col-span-4">
-      <PhotoWall photos={photos} client:load />
+    <div class="md:col-span-2 lg:col-span-5 flex flex-col gap-5 lg:gap-6">
+      <div class="grid grid-cols-2 gap-5 lg:gap-6 items-stretch">
+        <WriteButton client:load />
+        <DigitalClock client:load />
+      </div>
+      <DailyFeed feed={feed.map((f) => ({ slug: f.slug, date: f.data.date, mood: f.data.mood, content: f.body ?? '' }))} client:load />
     </div>
 
-    {/* Right col group: WriteButton + Clock */}
-    <div class="md:col-span-2 lg:col-span-5 grid grid-cols-2 gap-5 lg:gap-6">
-      <WriteButton client:load />
-      <DigitalClock client:load />
-    </div>
-
-    {/* Greeting */}
-    <div class="md:col-span-2 lg:col-span-4">
+    {/* Greeting + Social Links */}
+    <div class="md:col-span-2 lg:col-span-3 flex flex-col gap-5 lg:gap-6 w-[calc(100%+100px)]">
       <GreetingCard client:load />
+      <SocialLinks client:load />
     </div>
 
     {/* Calendar */}
     <div class="md:col-span-2 lg:col-span-4">
-      <MiniCalendar markedDates={markedDates} client:load />
+      <div class="scale-[0.95] origin-top ml-[84px]">
+        <MiniCalendar markedDates={markedDates} client:load />
+      </div>
     </div>
 
-    {/* Latest Article */}
-    <div class="lg:col-span-4">
+    {/* Latest Article + Featured Project */}
+    <div class="lg:col-span-5 -ml-4 flex flex-col gap-5 lg:gap-6">
       <LatestArticleCard article={latestArticle} client:load />
-    </div>
-
-    {/* Social Links */}
-    <div class="md:col-span-2 lg:col-span-8">
-      <SocialLinks client:load />
-    </div>
-
-    {/* Random Project (centered, full width) */}
-    <div class="md:col-span-2 lg:col-span-12">
       <RandomProjectCard projects={projects} client:load />
     </div>
   </div>

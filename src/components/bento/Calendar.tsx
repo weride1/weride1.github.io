@@ -50,7 +50,7 @@ export default function MiniCalendar({ markedDates = [], linkPrefix = '/daily/' 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="glass-card p-5 flex flex-col"
+      className="glass-card p-3 flex flex-col h-fit"
     >
       <div className="flex items-center justify-between mb-3">
         <div className="text-sm font-medium text-gray-700">
@@ -60,32 +60,32 @@ export default function MiniCalendar({ markedDates = [], linkPrefix = '/daily/' 
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="p-1.5 rounded-full hover:bg-white/60 transition-colors text-gray-500"
+            className="p-1 rounded-full hover:bg-white/60 transition-colors text-gray-500"
             aria-label="上个月"
           >
-            <ChevronLeft size={14} />
+            <ChevronLeft size={12} />
           </button>
           <button
             type="button"
             onClick={() => setView({ year: today.getFullYear(), month: today.getMonth() })}
-            className="px-2 py-1 text-[10px] tracking-wide rounded-full hover:bg-white/60 transition-colors text-gray-500"
+            className="px-1.5 py-0.5 text-xs tracking-wide rounded-full hover:bg-white/60 transition-colors text-gray-500"
           >
             今天
           </button>
           <button
             type="button"
             onClick={() => navigate(1)}
-            className="p-1.5 rounded-full hover:bg-white/60 transition-colors text-gray-500"
+            className="p-1 rounded-full hover:bg-white/60 transition-colors text-gray-500"
             aria-label="下个月"
           >
-            <ChevronRight size={14} />
+            <ChevronRight size={12} />
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-7 gap-0.5 text-center flex-1">
+      <div className="grid grid-cols-7 gap-px text-center">
         {weekDays.map((d) => (
-          <div key={d} className="text-[10px] text-gray-400 py-1">
+          <div key={d} className="text-xs text-gray-400 py-0.5">
             {d}
           </div>
         ))}
@@ -99,7 +99,7 @@ export default function MiniCalendar({ markedDates = [], linkPrefix = '/daily/' 
             <motion.div
               whileHover={{ scale: 1.15 }}
               whileTap={{ scale: 0.95 }}
-              className={`relative aspect-square flex items-center justify-center rounded-full text-xs cursor-pointer transition-colors ${
+              className={`relative aspect-square flex items-center justify-center rounded-full text-[13px] cursor-pointer transition-colors ${
                 isToday
                   ? 'bg-mint-400 text-white font-medium shadow-sm'
                   : hasEntry

@@ -36,7 +36,7 @@ export default function LatestArticleCard({ article }: Props) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.1 }}
-      className="glass-card p-5 flex gap-4 items-stretch group cursor-pointer relative overflow-hidden"
+      className="glass-card p-5 flex gap-4 items-stretch group cursor-pointer relative overflow-hidden h-full"
     >
       {/* Thumbnail */}
       <div className="shrink-0 w-20 rounded-2xl overflow-hidden bg-gradient-to-br from-mint-200 to-amber-100 border border-white/60 flex items-center justify-center">

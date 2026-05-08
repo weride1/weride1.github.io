@@ -46,10 +46,10 @@ export default function RandomProjectCard({ projects }: Props) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="glass-card p-6 group cursor-pointer relative overflow-hidden flex gap-5 items-stretch"
+      className="glass-card p-3 group cursor-pointer relative overflow-hidden flex gap-3 items-stretch"
     >
       {/* Cover */}
-      <div className="shrink-0 w-28 md:w-36 rounded-2xl overflow-hidden bg-gradient-to-br from-mint-300 to-amber-100 border border-white/60 flex items-center justify-center relative">
+      <div className="shrink-0 w-20 md:w-[88px] rounded-2xl overflow-hidden bg-gradient-to-br from-mint-300 to-amber-100 border border-white/60 flex items-center justify-center relative">
         {project.cover ? (
           <img
             src={project.cover}
@@ -59,11 +59,11 @@ export default function RandomProjectCard({ projects }: Props) {
           />
         ) : (
           <>
-            <span className="font-hand text-6xl text-mint-700/70 select-none">
+            <span className="font-hand text-4xl text-mint-700/70 select-none">
               {initial}
             </span>
             <Code
-              size={16}
+              size={14}
               className="absolute bottom-2 right-2 text-mint-700/50"
             />
           </>
@@ -71,22 +71,22 @@ export default function RandomProjectCard({ projects }: Props) {
       </div>
 
       <div className="flex-1 min-w-0 flex flex-col">
-        <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-gray-400 uppercase mb-1.5">
+        <div className="flex items-center gap-2 text-[9px] tracking-[0.2em] text-gray-400 uppercase mb-1">
           <Sparkles size={10} className="text-mint-500" />
           <span>Featured Project</span>
         </div>
-        <h3 className="text-base font-semibold text-gray-800 group-hover:text-mint-600 transition-colors leading-snug">
+        <h3 className="text-sm font-semibold text-gray-800 group-hover:text-mint-600 transition-colors leading-snug">
           {project.title}
         </h3>
-        <p className="text-xs text-gray-500 leading-relaxed line-clamp-2 mt-1.5">
+        <p className="text-[11px] text-gray-500 leading-relaxed line-clamp-2 mt-1">
           {project.description}
         </p>
-        <div className="flex items-center justify-between mt-auto pt-3">
+        <div className="flex items-center justify-between mt-auto pt-2">
           <div className="flex flex-wrap gap-1.5">
             {project.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="text-[10px] text-gray-600 bg-white/60 border border-white/50 px-2 py-0.5 rounded-full"
+                className="text-[9px] text-gray-600 bg-white/60 border border-white/50 px-1.5 py-0.5 rounded-full"
               >
                 {tag}
               </span>
@@ -102,7 +102,7 @@ export default function RandomProjectCard({ projects }: Props) {
       </div>
 
       <ArrowUpRight
-        size={16}
+        size={14}
         className="absolute top-4 right-4 text-gray-300 group-hover:text-mint-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
       />
     </motion.a>

@@ -28,17 +28,17 @@ export default function DailyFeed({ feed }: { feed: FeedItem[] }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.4 }}
-      className="glass-container p-8"
+      className="glass-container p-3 max-h-[240px] overflow-y-auto"
     >
-      <div className="flex items-center gap-2 mb-6">
-        <Activity size={16} className="text-emerald-500" />
-        <h2 className="text-lg font-semibold text-gray-800">信息流日报</h2>
+      <div className="flex items-center gap-2 mb-3">
+        <Activity size={14} className="text-emerald-500" />
+        <h2 className="text-sm font-semibold text-gray-800">信息流日报</h2>
       </div>
-      <div className="relative pl-8">
+      <div className="relative pl-6">
         {/* Timeline dashed line */}
         <div className="absolute left-3 top-2 bottom-2 w-px border-l border-dashed border-gray-300" />
 
-        <div className="space-y-4">
+        <div className="space-y-2">
           {feed.map((item, i) => {
             const isExpanded = expandedSlug === item.slug;
             return (
@@ -54,7 +54,7 @@ export default function DailyFeed({ feed }: { feed: FeedItem[] }) {
 
                 <motion.div
                   whileHover={{ backgroundColor: 'rgba(255,255,255,0.4)' }}
-                  className="rounded-2xl p-4 cursor-pointer transition-all duration-300"
+                  className="rounded-2xl p-2 cursor-pointer transition-all duration-300"
                   onClick={() => toggleExpand(item.slug)}
                 >
                   <div className="flex items-center justify-between mb-1">

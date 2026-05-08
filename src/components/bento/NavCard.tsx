@@ -39,7 +39,7 @@ export default function NavCard() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="glass-card p-6 flex flex-col"
+      className="glass-card p-6 flex flex-col h-full"
     >
       <div className="flex items-center gap-3 mb-6">
         <div className="relative w-12 h-12 rounded-full bg-amber-300 overflow-hidden border-2 border-white/70 shadow-sm shrink-0">

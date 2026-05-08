@@ -56,7 +56,7 @@ export default function NavCard() {
               weride1
             </h2>
           </div>
-          <p className="text-xs text-gray-500 mt-0.5 truncate">个人门户 · 治愈系</p>
+          <p className="text-xs text-gray-500 mt-0.5 truncate">1947999194@qq.com</p>
         </div>
       </div>
 

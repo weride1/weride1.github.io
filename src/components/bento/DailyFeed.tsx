@@ -29,7 +29,7 @@ export default function DailyFeed({ feed }: { feed: FeedItem[] }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.4 }}
       className="glass-container p-3 flex flex-col"
-      style={{ height: '300px' }}
+      style={{ height: '250px' }}
     >
       {/* 固定标题 */}
       <div className="flex items-center gap-2 mb-3 shrink-0">

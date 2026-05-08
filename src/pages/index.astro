@@ -65,14 +65,14 @@ const photos = [
       <DailyFeed feed={feed.map((f) => ({ slug: f.slug, date: f.data.date, mood: f.data.mood, content: f.body ?? '' }))} client:load />
     </div>
 
-    {/* Greeting + Social Links - 向上移动与照片墙底部间隔50px */}
-    <div class="md:col-span-2 lg:col-span-3 flex flex-col gap-5 lg:gap-6 w-[calc(100%+100px)] lg:-mt-[150px]">
+    {/* Greeting + Social Links */}
+    <div class="md:col-span-2 lg:col-span-3 flex flex-col gap-5 lg:gap-6 w-[calc(100%+100px)]">
       <GreetingCard client:load />
       <SocialLinks client:load />
     </div>
 
     {/* Calendar */}
-    <div class="md:col-span-2 lg:col-span-4 lg:-mt-[150px]">
+    <div class="md:col-span-2 lg:col-span-4">
       <div class="scale-[0.95] origin-top ml-[84px]">
         <MiniCalendar markedDates={markedDates} client:load />
       </div>

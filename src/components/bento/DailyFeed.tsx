@@ -20,7 +20,7 @@ export default function DailyFeed({ feed }: { feed: FeedItem[] }) {
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
 
   // 按日期倒序排序
-  const sortedFeed = [...feed].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const sortedFeed = [...feed].sort((a, b) => b.date.localeCompare(a.date));
 
   const toggleExpand = (slug: string) => {
     setExpandedSlug(expandedSlug === slug ? null : slug);
